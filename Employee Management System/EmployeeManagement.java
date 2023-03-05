@@ -49,9 +49,20 @@ public class EmployeeManagement {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            System.out.println("**************Welcome to Employee Management System************");
+            System.out.println("1. Add Employee");
+            System.out.println("2. View Employee");
+            System.out.println("3. Update Employee");
+            System.out.println("4. Delete Employee");
+            System.out.println("5. View All Users");
+            System.out.println("6. Exist");
             System.out.print("enter your option");
             int n = sc.nextInt();
+            // //****************************
+            // first condition
+            // *****************/
             if (n == 1) {
+                System.out.println("************* Add Employee *************");
                 System.out.print("enter your name:");
                 sc.nextLine();
                 String name = sc.nextLine();
@@ -64,12 +75,14 @@ public class EmployeeManagement {
                 Employee obj = new Employee(name, id, salary, pass);
                 arr[id] = obj;
             } else if (n == 2) {
-                System.out.println("*************View Employee*************");
+                System.out.println("************* View Employee *************");
                 System.out.print("Give Your Employee ID Number:");
                 int num = sc.nextInt();
                 if (num > id) {
-                    System.out.println("*************Wrong Id*************");
-                } else {
+                    System.out.println("************* Wrong Id *************");
+                }else if(arr[num]==null){
+                    System.out.println("*********** There no user available *************");
+                 }else {
                     System.out.print("Enter Your Employee Password:");
                     sc.nextLine();
                     String password = sc.nextLine();
@@ -78,17 +91,19 @@ public class EmployeeManagement {
                         System.out.println(
                                 arr[num].name + " \t\t\t\t " + arr[num].id + " \t\t\t\t " + arr[num].getSalary());
                     } else {
-                        System.out.println("*************Wrong Password*************");
+                        System.out.println("************* Wrong Password *************");
                     }
                 }
 
             } else if (n == 3) {
-                System.out.println("*************Update Employee*************");
+                System.out.println("************* Update Employee *************");
                 System.out.print("Give Your Employee ID Number:");
                 int num = sc.nextInt();
                 if (num > id) {
-                    System.out.println("*************Wrong Id*************");
-                } else {
+                    System.out.println("************* Wrong Id *************");
+                }else if(arr[num]==null){
+                   System.out.println("*********** There no user available *************");
+                }else {
                     System.out.print("Enter Your Employee Previous Password:");
                     sc.nextLine();
                     String password = sc.nextLine();
@@ -127,14 +142,38 @@ public class EmployeeManagement {
                         }
 
                     } else {
-                        System.out.println("*************Wrong Password*************");
+                        System.out.println("************* Wrong Password *************");
                     }
                 }
-            } else if (n == 5) {
-                System.out.println("*************Show All Employees Details*************");
+            }else if(n==4){
+                System.out.println("************* Update Employee *************");
+                System.out.print("Give Your Employee ID Number:");
+                int num = sc.nextInt();
+                if (num > id) {
+                    System.out.println("************* Wrong Id *************");
+                }else if(arr[num]==null){
+                    System.out.println("*********** There no user available *************");
+                 }else{
+                    System.out.print("Enter Your Employee Password:");
+                    sc.nextLine();
+                    String password = sc.nextLine();
+                    if (password.equals(arr[num].getPassword())) {
+                        arr[num]=null;
+                        System.out.println("*** Employee Are Deleted Successfully ****");
+                    }else{
+                        System.out.println("************* Wrong Password *************");
+                    }
+                }
+            }else if (n == 5) {
+                System.out.println("************* Show All Employees Details *************");
                 System.out.println("Employee Name \t\t\t Employee ID \t\t\t Employee Salary");
                 for (int i = 0; i <= id; i++) {
-                    System.out.println(arr[i].name + " \t\t\t\t " + arr[i].id + " \t\t\t\t " + arr[i].getSalary());
+                    if(arr[i]==null){
+                        continue;
+                    }else{
+                        System.out.println(arr[i].name + " \t\t\t\t " + arr[i].id + " \t\t\t\t " + arr[i].getSalary());
+                    }
+                    
                 }
             } else if (n == 6) {
                 break;
